@@ -46,10 +46,18 @@ header {
     margin: 6px auto;
 }
 
-.garage-info{
+.garage-div{
   display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+}
+
+.garage-items{
+  width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .status{

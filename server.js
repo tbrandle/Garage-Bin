@@ -50,6 +50,14 @@ app.get('/api/v1/items', (request, response) => {
     .catch(error => console.log(error))
 })
 
+app.get('/api/v1/items/sort', (request, response) => {
+  database('items').orderBy('name', 'asc').select()
+    .then(items => {
+      response.status(200).json(items)
+    })
+    .catch(error => console.log(error))
+})
+
 app.get('/api/v1/:id/item', (request, response) => {
     database('items').where('id', request.params.id).select()
     .then(item => response.status(200).json(item))
