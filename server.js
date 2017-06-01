@@ -51,30 +51,34 @@ app.get('/api/v1/items', (request, response) => {
 })
 
 app.get('/api/v1/:id/item', (request, response) => {
-  database('items').where('id', request.params.id).select()
-  .then(item => response.status(200).json(item))
-  .catch(error => response.status(422).send({
-    success: false,
-    message: error.message
-  }));
-})
+    database('items').where('id', request.params.id).select()
+    .then(item => response.status(200).json(item))
+    .catch(error => response.status(422).send({
+      success: false,
+      message: error.message
+    }));
 
-// app.get('/api/v1/count', (request, response) => {
-//   database('items').where().count()
-//     .then(result => {
-//       const { count } = result[0]
-//       response.json(count)
-//     })
-//     .catch(error => console.log(error))
-// })
+})
 
 /**************** POST requests *****************/
 
 app.post('/api/v1/items', (request, response) => {
-  database('items').insert(request.body, ['id', 'name', 'reason', 'cleanliness'])
+  const { name, reason, cleanliness } = request.body
+  if (name && reason && cleanliness) {
+    database('items').insert(request.body, ['id', 'name', 'reason', 'cleanliness'])
     .then(item => response.json(item))
-    .catch(error => res.status(422).send({
+    .catch(error => response.status(422).send({
       success: false,
       message: error.message
     }));
+  } else {
+    response.status(422).send({
+      success: false,
+      message: 'Please include name, reason, and cleanliness'
+    });
+  }
+
 })
+
+
+module.exports = app
