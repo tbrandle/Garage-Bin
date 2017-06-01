@@ -14,8 +14,7 @@ const appendGarageStatus = (results) => {
     `)
 }
 
-const appendItems = (results) => {
-  const { items } = results
+const appendItems = (items) => {
   // need to clear out the items wrapper
   items.map(item => {
     $('.items-wrapper').append(`<div id=${item.id} class="item">${item.name}</div>`)
@@ -27,31 +26,21 @@ const appendItems = (results) => {
 const fetchItems = () => {
   fetch('/api/v1/items')
     .then((response) => response.json())
-    .then(items => {
-      appendItems(items)
-      appendGarageStatus(items)
+    .then(result => {
+      appendItems(result.items)
+      appendGarageStatus(result)
     })
     .catch(error => console.log(error))
 }
-//
-// const fetchCount = () => {
-//   fetch('/api/v1/count')
-//   .then(response => response.json())
-//   .then(count => {
-//   })
-//   .catch(error => console.log(error))
-// }
 
 $('.open-garage').on('click', () => {
   fetchItems()
-  // fetchCount()
 })
 
 $('.add-item').on('click', () => {
   const $name = $('.name-input').val()
   const $reason = $('.reason-input').val()
   const $cleanliness = $('.cleanliness-input').val()
-  console.log($name, $reason, $cleanliness);
   fetch('/api/v1/items', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
