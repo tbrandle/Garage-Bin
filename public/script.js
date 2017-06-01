@@ -1,32 +1,32 @@
-class Garage {
-  constructor() {
-    this.open = false;
-    this.items = []
-  }
+const $name = $('.name-input').val()
+const $reason = $('.reason-input').val()
+const $cleanliness = $('.cleanliness-input').val()
 
-  addItem(item){
-    this.items.push(item)
-  }
-
-  openDoor(){
-    this.open = true;
-  }
-
-  closeDoor(){
-    this.open = false;
-  }
-
+const appendItems = (items) => {
+  // need to clear out the items wrapper
+  items.map(item => {
+    $('.items-wrapper').append(`<div>${item.name}${item.reason}${item.cleanliness}</div>`)
+  })
 }
 
-const garage = new Garage()
-console.log(garage.openDoor);
 
 $('.open-garage').on('click', () => {
-  garage.openDoor()
-  console.log(garage);
+  fetch('/api/v1/items')
+    .then((response) => response.json())
+    .then((items) => appendItems(items))
+    .catch(error => console.log(error))
 })
 
-$('.close-garage').on('click', () => {
-  garage.closeDoor()
-  console.log(garage);
+$('.add-item').on('click', () => {
+  fetch('/api/v1/items', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+        name: $name,
+        reason: $reason,
+        cleanliness: $cleanliness
+    })
+  })
+  .then(respons => response.json())
+  .then(items => appendItems(items))
 })
