@@ -17,3 +17,16 @@ app.set('port', process.env.PORT || 3000);
 app.listen(app.get('port'), () => {
   console.log(`port is running on ${app.get('port')}.`);
 });
+
+
+/**************** GET requests *****************/
+
+app.get('/', (request, response) => {
+  fs.readFile(`${__dirname}/index.html`, (err, file) => {
+    response.send(file);
+  });
+});
+
+app.get('/api/v1/items', () => {
+  database.select()
+})
