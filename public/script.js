@@ -1,30 +1,39 @@
 
 const appendGarageStatus = (results) => {
   const { Dusty, Rancid, Sparkling, totalCount } = results
-  $('.items-wrapper').prepend(`
+  $('.garage').prepend(`
     <section class="garage-info">
-      <p>Garage Status:</p>
+      <p class="status">Garage Status:</p>
       <p class="item-count">Total count: ${totalCount || 0}</p>
-      <div class="garage-cleanliness-status">
-        <p>Sparkling: ${Sparkling || 0}</p>
-        <p>Dusty: ${Dusty || 0}</p>
-        <p>Rancid: ${Rancid || 0}</p>
-      </div>
+      <p>Sparkling: ${Sparkling || 0}</p>
+      <p>Dusty: ${Dusty || 0}</p>
+      <p>Rancid: ${Rancid || 0}</p>
     </section>
     `)
 }
 
 const appendItems = (items) => {
   items.map(item => {
-    $('.items-wrapper').append(`<div id=${item.id} class="item">${item.name}</div>`)
+    $('.garage').append(`<div id=${item.id} class="item">${item.name}</div>`)
   })
+}
+
+const appendItemInfo = (item) => {
+  $('.item-info-wrapper').children().remove()
+  $('.item-info-wrapper').append(`
+    <div id=${item.id} class="item-info">
+      <p>${item.name}</p>
+      <p>${item.reason}</p>
+      <p>${item.cleanliness}</p>
+    </div>`
+  )
 }
 
 const fetchItems = () => {
   fetch('/api/v1/items')
     .then((response) => response.json())
     .then(result => {
-      $('.items-wrapper').children().remove();
+      $('.garage').children().remove();
       appendItems(result.items)
       appendGarageStatus(result)
     })
@@ -48,7 +57,7 @@ const postItem = () => {
   .catch(error => console.log(error))
 }
 
-  
+
 $('.open-garage').on('click', () => {
   fetchItems()
 })
@@ -57,9 +66,12 @@ $('.add-item').on('click', () => {
   postItem()
 })
 
-$('.items-wrapper').on('click', '.item', function () {
+$('.garage').on('click', '.item', function () {
+  console.log("working");
   const $id = $(this).attr('id')
   fetch(`/api/v1/${$id}/item`)
     .then(response => response.json())
-    .then(item => console.log(item))
+    .then(item => {
+      appendItemInfo(item[0])
+    })
 })

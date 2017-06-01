@@ -3,23 +3,38 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet">
     <link rel="stylesheet" href="main.css" type="text/css">
     <title>GarageBin</title>
   </head>
   <body>
-    <h1>GarageBin</h1>
-    <form class="new-item-form">
-      <input class="name-input" type="text" >name</input>
-      <input class="reason-input" type="text" >reason</input>
-      <select class="cleanliness-input">
-        <option>Sparkling</option>
-        <option>Dusty</option>
-        <option>Rancid</option>
-      </select>
-    </form>
-    <button class="add-item" type="button" name="button">add item</button>
+    <header>
+      <h1 class="logo">GarageBin</h1>
+    </header>
+    <section class="add-new-item-wrapper">
+      <form class="new-item-form">
+        <div class="input-wrapper">
+          <p>Add a new item</p>
+          <input class="name-input" type="text" placeholder="name">
+          <input class="reason-input" type="text" placeholder="reason">
+          <p>Select cleanliness:</p>
+          <select class="cleanliness-input">
+            <option>Sparkling</option>
+            <option>Dusty</option>
+            <option>Rancid</option>
+          </select>
+      </div>
+      </form>
+      <button class="add-item" type="button" name="button">add item</button>
+    </section>
 
-    <section class="items-wrapper">
+    <section class="garage">
+    </section>
+    <section class="item-info-section">
+      <p>Item info:</p>
+      <section class="item-info-wrapper">
+
+      </section>
     </section>
     <!-- <section class="garage-info">
       <p>Garage Status:</p>

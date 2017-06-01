@@ -1,3 +1,81 @@
-h1{
-  color: blue;
+body {
+  font-family: 'Architects Daughter', cursive;
+  height: 100%;
+}
+
+input, button {
+  font-family: 'Architects Daughter', cursive;
+}
+
+p{
+  margin: 0;
+}
+header {
+  display: flex;
+  justify-content: center;
+}
+
+.dropdown-wrapper{
+  display: flex;
+  justify-content: center;
+}
+
+.add-new-item-wrapper {
+  border: 1px grey solid;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.new-item-form {
+  display: flex;
+  justify-content: center;
+      padding: 16px;
+}
+
+.name-input, .reason-input{
+  display: block;
+}
+
+.add-item {
+  width: 116px;
+    height: 30px;
+    background-color: transparent;
+    border: 2px orange solid;
+    border-radius: 20px 20px;
+    margin: 6px auto;
+}
+
+.garage-info{
+  display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.status{
+  width: 100%;
+}
+
+.garage{
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  /*margin: auto;*/
+  border: 2px black solid;
+  height: 400px;
+  clear: both;
+}
+
+.item-info-section{
+  float: right;
+  width: 18.8%;
+  height: 400px;
+  border: 2px black solid;
+}
+
+.item {
+  border: 1px lightgrey solid;
+width: 94%;
+text-align: center;
 }
