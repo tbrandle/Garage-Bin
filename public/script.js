@@ -20,24 +20,21 @@ const appendItems = (items) => {
 }
 
 const clearSection = (section)=> {
-
   $(section).children().remove()
-
 }
 
 const appendItemInfo = (item) => {
   clearSection('.item-info-wrapper')
   $('.item-info-wrapper').append(`
     <div id=${item.id} class="item-info">
-      <p>${item.name}</p>
-      <p>${item.reason}</p>
-      <p>${item.cleanliness}</p>
+      <p>name: ${item.name}</p>
+      <p>reason: ${item.reason}</p>
+      <p>cleanliness: ${item.cleanliness}</p>
     </div>`
   )
 }
 
 const fetchItems = () => {
-
   fetch('/api/v1/items')
     .then((response) => response.json())
     .then(result => {
@@ -82,7 +79,6 @@ $('.garage-items').on('click', '.item', function () {
 })
 
 $('.sort-items').on('click', () => {
-
   fetch('/api/v1/items/sort')
     .then(response => response.json())
     .then(items => {

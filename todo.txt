@@ -1,8 +1,4 @@
 
-MAJOR: The list can sort items by item name.
-MAJOR: User should be able to navigate to a particular item by clicking its name on the list. On this page, the user should see the following:
-    MINOR: The name of the particular garage item.
-    MINOR: The reason it lingers.
     MINOR: A dropdown or other option to change the cleanliness of the item.
 
 bugs:
