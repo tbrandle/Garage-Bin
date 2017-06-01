@@ -1,6 +1,3 @@
-const $name = $('.name-input').val()
-const $reason = $('.reason-input').val()
-const $cleanliness = $('.cleanliness-input').val()
 
 const appendItems = (items) => {
   // need to clear out the items wrapper
@@ -18,6 +15,10 @@ $('.open-garage').on('click', () => {
 })
 
 $('.add-item').on('click', () => {
+  const $name = $('.name-input').val()
+  const $reason = $('.reason-input').val()
+  const $cleanliness = $('.cleanliness-input').val()
+  console.log($name, $reason, $cleanliness);
   fetch('/api/v1/items', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -27,6 +28,6 @@ $('.add-item').on('click', () => {
         cleanliness: $cleanliness
     })
   })
-  .then(respons => response.json())
-  .then(items => appendItems(items))
+  .then(response => response.json())
+  .then(item => appendItems(item))
 })

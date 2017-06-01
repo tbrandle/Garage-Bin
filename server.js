@@ -46,7 +46,7 @@ app.get('/api/v1/items', (request, response) => {
 
 app.post('/api/v1/items', (request, response) => {
   database('items').insert(request.body, ['id', 'name', 'reason', 'cleanliness'])
-    .then(item => response.json(...item))
+    .then(item => response.json(item))
     .catch(error => res.status(422).send({
       success: false,
       message: error.message
