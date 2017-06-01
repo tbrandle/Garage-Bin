@@ -21,6 +21,19 @@ app.listen(app.get('port'), () => {
 
 /**************** GET requests *****************/
 
+const getItemCounts = (items) => {
+  const cleanlinessCount =  items.reduce((obj, item) => {
+    const key = item.cleanliness
+    if (!obj[key]) {
+      obj[key] = 0
+    }
+    obj[key]+=1
+    return obj
+  }, {})
+  const result = Object.assign({}, cleanlinessCount, { totalCount: items.length })
+  return result
+}
+
 app.get('/', (request, response) => {
   fs.readFile(`${__dirname}/index.html`, (err, file) => {
     response.send(file);
@@ -29,7 +42,11 @@ app.get('/', (request, response) => {
 
 app.get('/api/v1/items', (request, response) => {
   database('items').select()
-    .then(items => response.status(200).json(items))
+    .then(items => {
+      const counts = getItemCounts(items)
+      const itemsWithCounts = Object.assign({}, counts, { items })
+      response.status(200).json(itemsWithCounts)
+    })
     .catch(error => console.log(error))
 })
 
@@ -41,6 +58,15 @@ app.get('/api/v1/:id/item', (request, response) => {
     message: error.message
   }));
 })
+
+// app.get('/api/v1/count', (request, response) => {
+//   database('items').where().count()
+//     .then(result => {
+//       const { count } = result[0]
+//       response.json(count)
+//     })
+//     .catch(error => console.log(error))
+// })
 
 /**************** POST requests *****************/
 
