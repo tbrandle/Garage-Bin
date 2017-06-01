@@ -2,10 +2,9 @@
 const appendItems = (items) => {
   // need to clear out the items wrapper
   items.map(item => {
-    $('.items-wrapper').append(`<div>${item.name}${item.reason}${item.cleanliness}</div>`)
+    $('.items-wrapper').append(`<div id=${item.id} class="item">${item.name}</div>`)
   })
 }
-
 
 $('.open-garage').on('click', () => {
   fetch('/api/v1/items')
@@ -30,4 +29,11 @@ $('.add-item').on('click', () => {
   })
   .then(response => response.json())
   .then(item => appendItems(item))
+})
+
+$('.items-wrapper').on('click', '.item', function () {
+  const $id = $(this).attr('id')
+  fetch(`/api/v1/${$id}/item`)
+    .then(response => response.json())
+    .then(item => console.log(item))
 })
