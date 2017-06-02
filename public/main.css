@@ -96,6 +96,7 @@ textarea {
 
 .garage {
   display          : inline-flex;
+  box-sizing       : border-box;
   width            : 80%;
   height           : 400px;
   clear            : both;
@@ -120,8 +121,8 @@ textarea {
   text-align : center;
 }
 
-.item:hover{
-  cursor: pointer;
+.item:hover {
+  cursor : pointer;
 }
 
 .edit-cleanliness {
