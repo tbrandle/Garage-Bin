@@ -97,3 +97,7 @@ textarea {
 width: 94%;
 text-align: center;
 }
+
+.edit-cleanliness{
+  border-top: 1px lightgrey solid;
+}

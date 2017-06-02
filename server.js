@@ -85,6 +85,18 @@ app.post('/api/v1/items', (request, response) => {
       message: 'Please include name, reason, and cleanliness'
     });
   }
+})
+
+/**************** PATCH requests *****************/
+
+app.patch('/api/v1/:id/item', (request, response) => {
+  const { cleanliness } = request.body
+    database('items').where('id', request.params.id).update('cleanliness', cleanliness)
+    .then(item => response.status(200).json(item))
+    .catch(error => response.status(422).send({
+      success: false,
+      message: error.message
+    }));
 
 })
 

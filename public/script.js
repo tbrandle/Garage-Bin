@@ -1,6 +1,5 @@
 
 const appendGarageStatus = (results) => {
-
   const { Dusty, Rancid, Sparkling, totalCount } = results
   $('.garage-info').prepend(`
     <div class="garage-div">
@@ -19,19 +18,43 @@ const appendItems = (items) => {
   })
 }
 
-const clearSection = (section)=> {
-  $(section).children().remove()
-}
-
 const appendItemInfo = (item) => {
   clearSection('.item-info-wrapper')
   $('.item-info-wrapper').append(`
     <div id=${item.id} class="item-info">
-      <p>name: ${item.name}</p>
-      <p>reason: ${item.reason}</p>
-      <p>cleanliness: ${item.cleanliness}</p>
+    <p>name: ${item.name}</p>
+    <p>reason: ${item.reason}</p>
+    <p>cleanliness: ${item.cleanliness}</p>
+    <p class="edit-cleanliness">edit cleanliness:</p>
+    <select class="change-cleanliness">
+      <option>Sparkling</option>
+      <option>Dusty</option>
+      <option>Rancid</option>
+    </select>
+    <button class="edit-submit">submit</button>
     </div>`
   )
+}
+
+//PATCH request
+$('.item-info-wrapper').on('click', '.edit-submit', () => {
+  const $itemId = $('.item-info-wrapper').children('.item-info').attr('id')
+  const $cleanlinessEdit = $('.change-cleanliness').val();
+  fetch(`/api/v1/${$itemId}/item`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id: $itemId,
+        cleanliness: $cleanlinessEdit
+      })
+    })
+    .then(response => response.json())
+    .then(updatedItem => console.log(updatedItem) )
+
+})
+
+const clearSection = (section)=> {
+  $(section).children().remove()
 }
 
 const fetchItems = () => {
