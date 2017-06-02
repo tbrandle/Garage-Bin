@@ -63,8 +63,16 @@ const postItem = () => {
   .catch(error => console.log(error))
 }
 
+let garageOpen = false;
 $('.open-garage').on('click', () => {
-  fetchItems()
+  if (garageOpen) {
+    clearSection('.garage-items')
+    clearSection('.garage-info')
+    garageOpen = false
+  } else {
+    fetchItems()
+    garageOpen = true;
+  }
 })
 
 $('.add-item').on('click', () => {
