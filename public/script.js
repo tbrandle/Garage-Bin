@@ -31,7 +31,7 @@ const appendItemInfo = (item) => {
       <option>Dusty</option>
       <option>Rancid</option>
     </select>
-    <button class="edit-submit">submit</button>
+    <button class="btn edit-submit">submit</button>
     </div>`
   )
 }
