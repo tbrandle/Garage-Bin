@@ -12,7 +12,8 @@ input {
 }
 
 button:hover {
-  background-color : white;
+  color            : white;
+  background-color : orange;
   cursor           : pointer;
 }
 
@@ -107,12 +108,13 @@ textarea {
 }
 
 .item-info-section {
-  box-sizing : border-box;
-  width      : 18.8%;
-  height     : 400px;
-  float      : right;
-  padding    : 4px;
-  border     : 2px black solid;
+  box-sizing       : border-box;
+  width            : 18.8%;
+  height           : 400px;
+  float            : right;
+  padding          : 4px;
+  border           : 2px black solid;
+  background-color : white;
 }
 
 .item {
