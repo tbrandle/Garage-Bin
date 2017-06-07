@@ -96,7 +96,63 @@ describe('test server side routes', () => {
         done();
       });
     })
+
+    it('GET api/v1/items/sort', (done) => {
+      chai.request(server)
+      .get('/api/v1/items/sort')
+      .end((err, response) => {
+        response.should.have.status(200);
+        response.should.be.json;
+        response.body.should.be.a('array');
+        response.body[0].should.have.property('name');
+        response.body[0].name.should.equal('boots');
+        response.body[0].should.have.property('reason');
+        response.body[0].reason.should.equal('too big');
+        response.body[0].should.have.property('cleanliness');
+        response.body[0].cleanliness.should.equal('Dusty');
+        response.body[0].should.have.property('id');
+        response.body[0].id.should.equal(1);
+
+        done();
+      });
+    })
+
+
   })
+
+  describe('PATCH routes', () => {
+    it('/api/v1/1/item', (done) => {
+      chai.request(server)
+        .patch('/api/v1/1/item')
+        .send({
+          cleanliness: 'Sparkling',
+          id: 1
+        })
+        .end((err, response) => {
+          console.log("response ", response.body);
+          response.should.have.status(200);
+          response.body.should.equal(1);
+          chai.request(server)
+          .get('/api/v1/1/item')
+          .end((err, response) => {
+            response.should.have.status(200);
+            response.should.be.json;
+            response.body.should.be.a('array');
+            response.body[0].should.have.property('name');
+            response.body[0].name.should.equal('boots');
+            response.body[0].should.have.property('reason');
+            response.body[0].reason.should.equal('too big');
+            response.body[0].should.have.property('cleanliness');
+            response.body[0].cleanliness.should.equal('Sparkling');
+            response.body[0].should.have.property('id');
+            response.body[0].id.should.equal(1);
+            done();
+          });
+        });
+      });
+
+  })
+
 
   describe('POST routes', () => {
     it('HAPPY /api/v1/items', (done) => {
